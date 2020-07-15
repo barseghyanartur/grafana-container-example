@@ -1,6 +1,6 @@
-ELK stack
-=========
-ELK stack (dev) with Docker (or Podman).
+Grafana + ELK stack
+===================
+Grafana and ELK stack (dev) with Docker (or Podman).
 
 Aim of this repository is to provide a minimalistic example of how to
 set up an ELK cluster for local development. For sake of simplicity, all
@@ -19,6 +19,14 @@ Usage
 .. code-block:: shell
 
     podman-compose up
+
+If you have issues with ports not being available outside the container, 
+run the following command before running ```podman-compose up```:
+
+.. code-block:: shell
+
+    podman-compose down
+    podman stop --all
 
 Services
 --------
@@ -41,4 +49,4 @@ Add messages to Logstash
 
 .. code-block:: shell
 
-    python factories/generate.py --amount=30000
+    python factories/generate.py --no-random-time --offset=51 --amount=1000

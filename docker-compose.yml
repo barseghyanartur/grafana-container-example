@@ -5,6 +5,8 @@ services:
     image: grafana/grafana:6.6.1
     ports:
       - 3000:3000
+    stdin_open: true
+    tty: true
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.5.1
@@ -15,6 +17,8 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    stdin_open: true
+    tty: true
 
   logstash:
     image: docker.elastic.co/logstash/logstash:7.5.1
@@ -33,6 +37,8 @@ services:
     volumes:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     command: logstash -f /usr/share/logstash/pipeline/logstash.conf --config.reload.automatic
+    stdin_open: true
+    tty: true
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.5.1
@@ -47,6 +53,8 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=true
       - ELASTIC_PASSWORD=changeme
+    stdin_open: true
+    tty: true
 
   # Filebeat container
   filebeat:
@@ -68,3 +76,5 @@ services:
       # available and ES exists for indexing
       - elasticsearch
       - logstash
+    stdin_open: true
+    tty: true
